@@ -9,8 +9,12 @@ public class Radio {
     public void setCurrentStation(int station) {
         if (station >= 0 && station <= 9) {
             this.currentStation = station;
+        } else {
+
+            System.out.println("Недопустимое значение: " + station);
         }
     }
+
 
     public void next() {
         if (currentStation == 9) {
