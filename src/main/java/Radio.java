@@ -1,23 +1,38 @@
 public class Radio {
     private int currentStation;
+    private final int stationCount;
     private int currentVolume;
+
+    public Radio() {
+        this(10); // По умолчанию 10 станций
+    }
+
+    public Radio(int stationCount) {
+        if (stationCount < 1) {
+            throw new IllegalArgumentException("Количество станций должно быть хотя бы 1");
+        }
+        this.stationCount = stationCount;
+        this.currentStation = 0;
+        this.currentVolume = 50; // Уровень громкости по умолчанию
+    }
 
     public int getCurrentStation() {
         return currentStation;
     }
 
-    public void setCurrentStation(int station) {
-        if (station >= 0 && station <= 9) {
-            this.currentStation = station;
-        } else {
+    public int getStationCount() {
+        return this.stationCount;
+    }
 
-            System.out.println("Недопустимое значение: " + station);
+    public void setCurrentStation(int station) {
+        if (station > 0 && station < stationCount)
+        {
+            this.currentStation = station;
         }
     }
 
-
     public void next() {
-        if (currentStation == 9) {
+        if (currentStation >= stationCount - 1) {
             currentStation = 0;
         } else {
             currentStation++;
@@ -26,7 +41,7 @@ public class Radio {
 
     public void prev() {
         if (currentStation == 0) {
-            currentStation = 9;
+            currentStation = stationCount - 1;
         } else {
             currentStation--;
         }
@@ -47,6 +62,5 @@ public class Radio {
             currentVolume--;
         }
     }
+
 }
-
-
